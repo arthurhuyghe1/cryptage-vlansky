@@ -1,0 +1,287 @@
+:root {
+    --bg-color: #050505;
+    --grid-color: rgba(0, 255, 255, 0.05);
+    --text-color: #e0e0e0;
+    --cyan: #00FFFF;
+    --magenta: #FF00FF;
+    --font-mono: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Grid */
+.background-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 800px;
+    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    position: relative;
+    border-radius: 4px;
+}
+
+.terminal-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+}
+
+.glitch-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem;
+}
+
+.logo {
+    max-width: 120px;
+    margin-bottom: 1rem;
+}
+
+.glitch {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 var(--magenta);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 var(--cyan);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 83px, 0); }
+    20% { clip: rect(66px, 9999px, 86px, 0); }
+    40% { clip: rect(22px, 9999px, 60px, 0); }
+    60% { clip: rect(96px, 9999px, 18px, 0); }
+    80% { clip: rect(69px, 9999px, 12px, 0); }
+    100% { clip: rect(44px, 9999px, 89px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    20% { clip: rect(81px, 9999px, 3px, 0); }
+    40% { clip: rect(31px, 9999px, 48px, 0); }
+    60% { clip: rect(69px, 9999px, 20px, 0); }
+    80% { clip: rect(27px, 9999px, 52px, 0); }
+    100% { clip: rect(78px, 9999px, 72px, 0); }
+}
+
+.subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.input-group, .output-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    padding: 1rem;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+textarea:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+textarea[readonly] {
+    color: var(--magenta);
+    background: rgba(0, 0, 0, 0.4);
+    border-style: dashed;
+}
+
+.actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid;
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    border-radius: 2px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-20deg);
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    left: 150%;
+}
+
+.btn-cyan {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.btn-cyan:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    text-shadow: 0 0 5px var(--cyan);
+}
+
+.btn-magenta {
+    border-color: var(--magenta);
+    color: var(--magenta);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.1);
+}
+
+.btn-magenta:hover {
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    text-shadow: 0 0 5px var(--magenta);
+}
+
+.btn-small {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    color: #aaa;
+    font-size: 0.8rem;
+    width: auto;
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    border-color: var(--text-color);
+    color: var(--text-color);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+}
+
+.notification.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.notification.error {
+    border-color: var(--magenta);
+    color: var(--magenta);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+}

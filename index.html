@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Cryptographique Vlansky</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="terminal-container">
+        <header class="glitch-header">
+            <img src="assets/logo.png" alt="Vlansky Logo" class="logo">
+            <h1 class="glitch" data-text="TERMINAL CRYPTOGRAPHIQUE">TERMINAL CRYPTOGRAPHIQUE</h1>
+            <p class="subtitle">SECURE.VLANSKY.OVH // CONNECTION ESTABLISHED</p>
+        </header>
+
+        <main class="console">
+            <div class="input-group">
+                <label for="inputText">>>> INPUT_DATA:</label>
+                <textarea id="inputText" placeholder="Entrez le texte à chiffrer ou déchiffrer..." spellcheck="false"></textarea>
+            </div>
+
+            <div class="actions">
+                <button id="btnEncode" class="btn btn-cyan">
+                    <span class="btn-text">ENCODER</span>
+                </button>
+                <button id="btnExtract" class="btn btn-magenta">
+                    <span class="btn-text">EXTRAIRE</span>
+                </button>
+            </div>
+
+            <div class="output-group">
+                <label for="outputText">>>> OUTPUT_DATA:</label>
+                <textarea id="outputText" readonly placeholder="Le résultat s'affichera ici..." spellcheck="false"></textarea>
+                <button id="btnCopy" class="btn btn-small">
+                    [ COPIER DANS LE PRESSE-PAPIER ]
+                </button>
+            </div>
+        </main>
+        
+        <div id="notification" class="notification hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
